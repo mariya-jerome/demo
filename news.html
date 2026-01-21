@@ -2,112 +2,86 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login Page</title>
-
+  <title>Login</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f2f2f2;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      background: #f4f4f4;
     }
-
     .login-box {
       background: #fff;
-      padding: 30px;
-      width: 320px;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
     }
-
-    h2 {
+    .login-box h2 {
       text-align: center;
       margin-bottom: 20px;
     }
-
-    input {
+    .login-box input {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
+      margin: 8px 0;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-
-    button {
+    .login-box button {
       width: 100%;
       padding: 10px;
-      background: #007bff;
-      color: white;
+      background: #007BFF;
+      color: #fff;
       border: none;
       border-radius: 4px;
       cursor: pointer;
     }
-
-    button:hover {
+    .login-box button:hover {
       background: #0056b3;
     }
-
     .error {
       color: red;
       font-size: 14px;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .success {
-      color: green;
-      font-size: 14px;
-      text-align: center;
       margin-top: 10px;
     }
   </style>
 </head>
 <body>
-
   <div class="login-box">
     <h2>Login</h2>
-
-    <form onsubmit="return validateLogin()">
-      <input type="text" id="username" placeholder="Username">
-      <input type="password" id="password" placeholder="Password">
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
       <button type="submit">Login</button>
+      <div id="errorMessage" class="error"></div>
     </form>
-
-    <div id="message"></div>
   </div>
 
   <script>
-    function validateLogin() {
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const message = document.getElementById("message");
+    const form = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('errorMessage');
 
-      // Clear previous messages
-      message.innerHTML = "";
-
-      // Validation
-      if (username === "" || password === "") {
-        message.innerHTML = "<p class='error'>All fields are required</p>";
-        return false;
-      }
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // prevent page reload
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
 
       if (password.length < 6) {
-        message.innerHTML = "<p class='error'>Password must be at least 6 characters</p>";
-        return false;
+        errorMessage.textContent = "Password must be at least 6 characters";
+        return;
       }
 
-      // Dummy credentials check
-      if (username === "admin" && password === "admin123") {
-        message.innerHTML = "<p class='success'>Login successful!</p>";
-        return false; // prevent page refresh for demo
+      // Example check (replace with real authentication logic)
+      if (username === "Jerome" && password === "secure123") {
+        errorMessage.style.color = "green";
+        errorMessage.textContent = "Login successful!";
       } else {
-        message.innerHTML = "<p class='error'>Invalid username or password</p>";
-        return false;
+        errorMessage.textContent = "Invalid username or password";
       }
-    }
+    });
   </script>
-
 </body>
 </html>
