@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 30px;
+      width: 320px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .success {
+      color: green;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Login</h2>
+
+    <form onsubmit="return validateLogin()">
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button type="submit">Login</button>
+    </form>
+
+    <div id="message"></div>
+  </div>
+
+  <script>
+    function validateLogin() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const message = document.getElementById("message");
+
+      // Clear previous messages
+      message.innerHTML = "";
+
+      // Validation
+      if (username === "" || password === "") {
+        message.innerHTML = "<p class='error'>All fields are required</p>";
+        return false;
+      }
+
+      if (password.length < 6) {
+        message.innerHTML = "<p class='error'>Password must be at least 6 characters</p>";
+        return false;
+      }
+
+      // Dummy credentials check
+      if (username === "admin" && password === "admin123") {
+        message.innerHTML = "<p class='success'>Login successful!</p>";
+        return false; // prevent page refresh for demo
+      } else {
+        message.innerHTML = "<p class='error'>Invalid username or password</p>";
+        return false;
+      }
+    }
+  </script>
+
+</body>
+</html>
